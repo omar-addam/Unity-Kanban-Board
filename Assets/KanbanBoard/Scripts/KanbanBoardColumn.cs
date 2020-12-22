@@ -46,7 +46,11 @@ namespace KanbanBoard
         /// </summary>
         public void Add(Item item)
         {
+            // Add to list
             Data.Add(item);
+
+            // Create a new entity instance
+            GameObject kanbanItem = Instantiate(ItemTemplate, transform);
         }
 
         /// <summary>
