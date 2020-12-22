@@ -1,4 +1,3 @@
-using KanbanBoard.DataStructure;
 using System;
 using UnityEngine;
 
@@ -12,9 +11,10 @@ namespace KanbanBoard
         /// <summary>
         /// Initializes the data displayed in this board.
         /// </summary>
-        public void Initialize(Board board)
+        public void Initialize(DataStructure.Board board)
         {
             Board = board;
+            DisplayPipelines();
         }
 
         #endregion
@@ -27,7 +27,7 @@ namespace KanbanBoard
         /// The data visualized in this kanban board.
         /// </summary>
         [SerializeField]
-        private Board Board;
+        private DataStructure.Board Board;
         
 
 
@@ -46,6 +46,33 @@ namespace KanbanBoard
         [SerializeField]
         [Tooltip("Template used for initiating pipeline stages.")]
         private GameObject PipelineTemplate;
+
+        #endregion
+
+        #region Pipeline Methods
+
+        /// <summary>
+        /// Displays all pipelines.
+        /// </summary>
+        private void DisplayPipelines()
+        {
+            // Clear all current pipelines
+            foreach (Transform entity in PipelinesParent.transform)
+                GameObject.Destroy(entity.gameObject);
+
+            // Display pipelines
+            foreach (var pipeline in Board?.Pipelines)
+            {
+                // Create a new entity instance
+                GameObject kanbanPipeline = Instantiate(PipelineTemplate, PipelinesParent.transform);
+
+                // Extract the script
+                KanbanPipeline script = kanbanPipeline.GetComponent<KanbanPipeline>();
+
+                // Initialize data
+                script.Initialize(pipeline);
+            }
+        }
 
         #endregion
 
