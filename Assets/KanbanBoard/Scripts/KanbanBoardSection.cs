@@ -10,12 +10,16 @@ namespace KanbanBoard
     {
 
         #region Initialization
+
         /// <summary>
         /// Initializes the content of the pipeline.
         /// </summary>
-        public void Initialize(List<Item> items)
+        public void Initialize(List<Item> items, List<Pipeline> pipelines)
         {
-            Data = items;
+            Data = items ?? new List<Item>();
+            Columns = pipelines ?? new List<Pipeline>();
+
+            InitializePipelines();
         }
 
         #endregion
@@ -26,6 +30,13 @@ namespace KanbanBoard
         /// Items displayed in this board.
         /// </summary>
         public List<Item> Data { private set; get; }
+
+        /// <summary>
+        /// A single column will be created for each pipeline.
+        /// </summary>
+        public List<Pipeline> Columns { private set; get; }
+
+
 
         /// <summary>
         /// The UI element used to inform users that the board is empty.
@@ -40,6 +51,30 @@ namespace KanbanBoard
         [SerializeField]
         [Tooltip("References the parent holding all the pipelines and their items.")]
         private GameObject PipelinesParent;
+
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        /// Displays the panels for each pipeline.
+        /// </summary>
+        private void InitializePipelines()
+        {
+            // Empty
+            if (Data.Count == 0)
+            {
+                EmptyUI.gameObject.SetActive(true);
+                PipelinesParent.gameObject.SetActive(false);
+            }
+
+            // Not empty
+            else
+            {
+                EmptyUI.gameObject.SetActive(false);
+                PipelinesParent.gameObject.SetActive(true);
+            }
+        }
 
         #endregion
 

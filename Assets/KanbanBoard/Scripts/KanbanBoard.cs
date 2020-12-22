@@ -113,7 +113,7 @@ namespace KanbanBoard
                 KanbanBoardSection script = board.GetComponent<KanbanBoardSection>();
 
                 // Initialize data
-                script.Initialize(Board?.Items);
+                script.Initialize(Board?.Items, Board?.Pipelines);
             }
         }
 
