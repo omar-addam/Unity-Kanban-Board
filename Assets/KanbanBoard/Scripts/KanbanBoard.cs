@@ -19,6 +19,14 @@ namespace KanbanBoard
             DisplayBoards();
         }
 
+        /// <summary>
+        /// Runs once every frame.
+        /// </summary>
+        private void Update()
+        {
+            UpdateHeaderPadding();
+        }
+
         #endregion
 
         #region Fields/Properties
@@ -127,8 +135,6 @@ namespace KanbanBoard
             // Refresh layouts to scale properly
             foreach (var layuout in BoardsParent.GetComponentsInChildren<RectTransform>())
                 LayoutRebuilder.ForceRebuildLayoutImmediate(layuout);
-
-            UpdateHeaderPadding();
         }
 
         /// <summary>
