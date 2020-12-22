@@ -169,6 +169,7 @@ GameObject:
   - component: {fileID: 2925203540289203318}
   - component: {fileID: 6428839078993829246}
   - component: {fileID: 6784895227708541293}
+  - component: {fileID: 5572485411650022944}
   m_Layer: 5
   m_Name: KanbanBoardColumn
   m_TagString: Untagged
@@ -260,6 +261,18 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &5572485411650022944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7503987912806032807}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f90561c445b60645be2b633c0cabbb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7829639686598790265
 GameObject:
   m_ObjectHideFlags: 0
