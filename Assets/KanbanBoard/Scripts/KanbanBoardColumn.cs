@@ -28,6 +28,15 @@ namespace KanbanBoard
         /// </summary>
         public List<Item> Data { private set; get; }
 
+
+
+        /// <summary>
+        /// Template used for initiating items. 
+        /// </summary>
+        [SerializeField]
+        [Tooltip("Template used for initiating items.")]
+        private GameObject ItemTemplate;
+
         #endregion
 
         #region Method
