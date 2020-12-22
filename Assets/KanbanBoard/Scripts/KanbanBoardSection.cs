@@ -52,6 +52,13 @@ namespace KanbanBoard
         [Tooltip("References the parent holding all the pipelines and their items.")]
         private GameObject PipelinesParent;
 
+        /// <summary>
+        /// Template used for initiating columns. 
+        /// </summary>
+        [SerializeField]
+        [Tooltip("Template used for initiating columns.")]
+        private GameObject PipelineColumnTemplate;
+
         #endregion
 
         #region Methods

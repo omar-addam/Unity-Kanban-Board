@@ -244,3 +244,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EmptyUI: {fileID: 7703731658270758798}
   PipelinesParent: {fileID: 7800390249447555088}
+  PipelineColumnTemplate: {fileID: 7503987912806032807, guid: b38d0cd890935ec4688281b4fc1872ef, type: 3}
