@@ -28,6 +28,15 @@ namespace KanbanBoard
         /// </summary>
         public List<Item> Data { private set; get; }
 
+
+
+        /// <summary>
+        /// Template used for initiating items. 
+        /// </summary>
+        [SerializeField]
+        [Tooltip("Template used for initiating items.")]
+        private GameObject ItemTemplate;
+
         #endregion
 
         #region Method
@@ -37,7 +46,17 @@ namespace KanbanBoard
         /// </summary>
         public void Add(Item item)
         {
+            // Add to list
             Data.Add(item);
+
+            // Create a new entity instance
+            GameObject kanbanItem = Instantiate(ItemTemplate, transform);
+
+            // Extract script
+            KanbanItem script = kanbanItem.GetComponent<KanbanItem>();
+
+            // Initialize data
+            script.Initialize(item);
         }
 
         /// <summary>

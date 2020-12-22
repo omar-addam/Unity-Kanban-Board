@@ -208,6 +208,7 @@ MonoBehaviour:
     _Items: []
   PipelinesParent: {fileID: 9142699355031313941}
   PipelineTemplate: {fileID: 222226248409949589, guid: 98ad3490899fb2f4f8374644df1e5215, type: 3}
+  BoardsScrollView: {fileID: 310290072829165229}
   BoardsParent: {fileID: 4515917056385391}
   BoardTemplate: {fileID: 8596948748897058220, guid: 987cd194b702eda48b74f1f546b306af, type: 3}
 --- !u!1 &3719555461816978079
@@ -613,8 +614,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -32.5}
-  m_SizeDelta: {x: -10, y: -65}
+  m_AnchoredPosition: {x: 0, y: -35}
+  m_SizeDelta: {x: -10, y: -70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8364771824206593117
 CanvasRenderer:

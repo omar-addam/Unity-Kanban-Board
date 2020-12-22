@@ -51,9 +51,9 @@ public class MainSceneManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Generates a full sample and displays it on the board.
+    /// Generates a small sample and displays it on the board.
     /// </summary>
-    public void GenerateFullSample()
+    public void GenerateSmallSample()
     {
         // Create a new board
         KanbanBoard.DataStructure.Board board = new KanbanBoard.DataStructure.Board();
@@ -72,6 +72,46 @@ public class MainSceneManager : MonoBehaviour
         board.Items.Add(new KanbanBoard.DataStructure.Item(toDoPipeline.Id));
         board.Items.Add(new KanbanBoard.DataStructure.Item(toDoPipeline.Id));
         board.Items.Add(new KanbanBoard.DataStructure.Item(toDoPipeline.Id));
+        board.Items.Add(new KanbanBoard.DataStructure.Item(reviewPipeline.Id));
+
+        // Display board
+        Board?.Initialize(board);
+    }
+
+    /// <summary>
+    /// Generates a scroll bar sample sample and displays it on the board.
+    /// </summary>
+    public void GenerateScrollBarSample()
+    {
+        // Create a new board
+        KanbanBoard.DataStructure.Board board = new KanbanBoard.DataStructure.Board();
+
+        // Populate with pipelines
+        KanbanBoard.DataStructure.Pipeline toDoPipeline = new KanbanBoard.DataStructure.Pipeline("TO DO");
+        KanbanBoard.DataStructure.Pipeline inProgressPipeline = new KanbanBoard.DataStructure.Pipeline("IN PROGRESS");
+        KanbanBoard.DataStructure.Pipeline reviewPipeline = new KanbanBoard.DataStructure.Pipeline("REVIEW");
+        KanbanBoard.DataStructure.Pipeline donePipeline = new KanbanBoard.DataStructure.Pipeline("DONE");
+        board.Pipelines.AddRange(new List<KanbanBoard.DataStructure.Pipeline>()
+        {
+            toDoPipeline, inProgressPipeline, reviewPipeline, donePipeline
+        });
+
+        // Populate with items
+        board.Items.Add(new KanbanBoard.DataStructure.Item(toDoPipeline.Id));
+        board.Items.Add(new KanbanBoard.DataStructure.Item(toDoPipeline.Id));
+        board.Items.Add(new KanbanBoard.DataStructure.Item(toDoPipeline.Id));
+        board.Items.Add(new KanbanBoard.DataStructure.Item(toDoPipeline.Id));
+        board.Items.Add(new KanbanBoard.DataStructure.Item(toDoPipeline.Id));
+        board.Items.Add(new KanbanBoard.DataStructure.Item(toDoPipeline.Id));
+        board.Items.Add(new KanbanBoard.DataStructure.Item(toDoPipeline.Id));
+        board.Items.Add(new KanbanBoard.DataStructure.Item(toDoPipeline.Id));
+        board.Items.Add(new KanbanBoard.DataStructure.Item(toDoPipeline.Id));
+        board.Items.Add(new KanbanBoard.DataStructure.Item(toDoPipeline.Id));
+        board.Items.Add(new KanbanBoard.DataStructure.Item(toDoPipeline.Id));
+        board.Items.Add(new KanbanBoard.DataStructure.Item(toDoPipeline.Id));
+        board.Items.Add(new KanbanBoard.DataStructure.Item(toDoPipeline.Id));
+        board.Items.Add(new KanbanBoard.DataStructure.Item(toDoPipeline.Id));
+        board.Items.Add(new KanbanBoard.DataStructure.Item(reviewPipeline.Id));
 
         // Display board
         Board?.Initialize(board);

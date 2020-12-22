@@ -19,6 +19,14 @@ namespace KanbanBoard
             DisplayBoards();
         }
 
+        /// <summary>
+        /// Runs once every frame.
+        /// </summary>
+        private void Update()
+        {
+            UpdateHeaderPadding();
+        }
+
         #endregion
 
         #region Fields/Properties
@@ -52,6 +60,13 @@ namespace KanbanBoard
 
 
         [Header("Boards")]
+
+        /// <summary>
+        /// References the scroll view of boards.
+        /// </summary>
+        [SerializeField]
+        [Tooltip("References the scroll view of boards.")]
+        private ScrollRect BoardsScrollView;
 
         /// <summary>
         /// References the parent holding all boards.
@@ -120,6 +135,32 @@ namespace KanbanBoard
             // Refresh layouts to scale properly
             foreach (var layuout in BoardsParent.GetComponentsInChildren<RectTransform>())
                 LayoutRebuilder.ForceRebuildLayoutImmediate(layuout);
+        }
+
+        /// <summary>
+        /// Updates the padding of the header based on the visibility of the scrollbar.
+        /// </summary>
+        public void UpdateHeaderPadding()
+        {
+            RectTransform header = PipelinesParent.GetComponent<RectTransform>();
+
+            // Check if scroll bar is visible
+            // and if we should update header
+            if (BoardsScrollView.verticalScrollbar.gameObject.activeSelf
+                && header.offsetMin.x == -header.offsetMax.x)
+            {
+                header.offsetMax = new Vector2
+                    (
+                        -header.offsetMin.x - BoardsScrollView.verticalScrollbar.GetComponent<RectTransform>().sizeDelta.x,
+                        header.offsetMax.y
+                    );
+            }
+
+            else if (!BoardsScrollView.verticalScrollbar.gameObject.activeSelf
+                && header.offsetMin.x != -header.offsetMax.x)
+            {
+                header.offsetMax = new Vector2(-header.offsetMin.x, header.offsetMax.y);
+            }
         }
 
         #endregion

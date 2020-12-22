@@ -61,6 +61,7 @@ namespace KanbanBoard
         private GameObject PipelineColumnTemplate;
 
 
+
         /// <summary>
         /// List of all columns created.
         /// </summary>
