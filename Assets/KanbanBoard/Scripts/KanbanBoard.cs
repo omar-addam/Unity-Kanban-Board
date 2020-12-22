@@ -15,6 +15,7 @@ namespace KanbanBoard
         {
             Board = board;
             DisplayPipelines();
+            DisplayBoards();
         }
 
         #endregion
@@ -89,6 +90,24 @@ namespace KanbanBoard
 
                 // Initialize data
                 script.Initialize(pipeline);
+            }
+        }
+
+        /// <summary>
+        /// Display all boards
+        /// </summary>
+        private void DisplayBoards()
+        {
+            // Note: At the moment, we only support a single board. In the future, we will allow grouping and thus support multiple boards in the same kanban view.
+
+            // Clear all boards
+            foreach (Transform entity in BoardsParent.transform)
+                GameObject.Destroy(entity.gameObject);
+
+            // Create the board
+            {
+                // Create a new entity instance
+                GameObject board = Instantiate(BoardTemplate, BoardsParent.transform);
             }
         }
 
