@@ -13,28 +13,28 @@ namespace KanbanBoard.DataStructure
         /// Empty constructor.
         /// </summary>
         public Item()
-            : this(string.Empty)
+            : this(Guid.NewGuid())
         {
         }
 
         /// <summary>
         /// Minimal constructor.
         /// </summary>
-        /// <param name="pipeline">The pipeline stage this item is currently at.</param>
-        public Item(string pipeline)
-            : this(Guid.NewGuid(), pipeline)
+        /// <param name="pipelineId">The pipeline stage this item is currently at.</param>
+        public Item(Guid pipelineId)
+            : this(Guid.NewGuid(), pipelineId)
         {
         }
 
         /// <summary>
         /// Default constructor.
         /// <param name="id">Unique identifier used to track a board item.</param>
-        /// <param name="pipeline">The pipeline stage this item is currently at.</param>
+        /// <param name="pipelineId">The pipeline stage this item is currently at.</param>
         /// </summary>
-        public Item(Guid id, string pipeline)
+        public Item(Guid id, Guid pipelineId)
         {
             _Id = id;
-            _Pipeline = pipeline;
+            _PipelineId = pipelineId;
         }
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace KanbanBoard.DataStructure
         /// </summary>
         /// <param name="item">Instance to clone.</param>
         public Item(Item item)
-            : this(item.Id, item.Pipeline)
+            : this(item.Id, item.PipelineId)
         {
         }
 
@@ -69,12 +69,12 @@ namespace KanbanBoard.DataStructure
         /// </summary>
         [SerializeField]
         [Tooltip("The pipeline stage this item is currently at.")]
-        private string _Pipeline;
+        private Guid _PipelineId;
 
         /// <summary>
         /// The pipeline stage this item is currently at.
         /// </summary>
-        public string Pipeline { get { return _Pipeline; } }
+        public Guid PipelineId { get { return _PipelineId; } }
 
         #endregion
 
