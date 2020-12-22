@@ -99,6 +99,11 @@ namespace KanbanBoard
                     // Add to list
                     columns.Add(pipeline.Id, script);
                 }
+
+                // Populate the boards with their items
+                foreach (var item in Data)
+                    if (columns.ContainsKey(item.PipelineId))
+                        columns[item.PipelineId].Add(item);
             }
         }
 
