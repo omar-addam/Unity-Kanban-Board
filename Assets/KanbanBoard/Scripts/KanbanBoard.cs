@@ -47,6 +47,24 @@ namespace KanbanBoard
         [Tooltip("Template used for initiating pipeline stages.")]
         private GameObject PipelineTemplate;
 
+
+
+        [Header("Boards")]
+
+        /// <summary>
+        /// References the parent holding all boards.
+        /// </summary>
+        [SerializeField]
+        [Tooltip("References the parent holding all boards.")]
+        private GameObject BoardsParent;
+
+        /// <summary>
+        /// Template used for initiating boards.
+        /// </summary>
+        [SerializeField]
+        [Tooltip("Template used for initiating boards.")]
+        private GameObject BoardTemplate;
+
         #endregion
 
         #region Pipeline Methods
