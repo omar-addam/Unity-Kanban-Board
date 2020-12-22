@@ -86,10 +86,14 @@ namespace KanbanBoard
                     GameObject.Destroy(entity.gameObject);
 
                 // Create columns
+                Dictionary<Guid, GameObject> columns = new Dictionary<Guid, GameObject>();
                 foreach (var pipeline in Columns)
                 {
                     // Create a new entity instance
                     GameObject kanbanPipeline = Instantiate(PipelineColumnTemplate, PipelinesParent.transform);
+
+                    // Add to list
+                    columns.Add(pipeline.Id, kanbanPipeline);
                 }
             }
         }
