@@ -108,6 +108,12 @@ namespace KanbanBoard
             {
                 // Create a new entity instance
                 GameObject board = Instantiate(BoardTemplate, BoardsParent.transform);
+
+                // Extract the script
+                KanbanBoardSection script = board.GetComponent<KanbanBoardSection>();
+
+                // Initialize data
+                script.Initialize(Board?.Items);
             }
         }
 
