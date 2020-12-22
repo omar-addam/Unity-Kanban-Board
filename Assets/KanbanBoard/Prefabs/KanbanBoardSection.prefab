@@ -153,6 +153,7 @@ GameObject:
   - component: {fileID: 4325349018168549938}
   - component: {fileID: 6703782027268989351}
   - component: {fileID: 7683162544603135336}
+  - component: {fileID: -7975056346463056010}
   m_Layer: 5
   m_Name: KanbanBoardSection
   m_TagString: Untagged
@@ -229,3 +230,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 0
   m_VerticalFit: 1
+--- !u!114 &-7975056346463056010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8596948748897058220}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb4c9de8701915942afb8120fe41cb10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EmptyUI: {fileID: 7703731658270758798}
+  PipelinesParent: {fileID: 7800390249447555088}
