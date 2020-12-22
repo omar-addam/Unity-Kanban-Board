@@ -72,6 +72,7 @@ public class MainSceneManager : MonoBehaviour
         board.Items.Add(new KanbanBoard.DataStructure.Item(toDoPipeline.Id));
         board.Items.Add(new KanbanBoard.DataStructure.Item(toDoPipeline.Id));
         board.Items.Add(new KanbanBoard.DataStructure.Item(toDoPipeline.Id));
+        board.Items.Add(new KanbanBoard.DataStructure.Item(reviewPipeline.Id));
 
         // Display board
         Board?.Initialize(board);
