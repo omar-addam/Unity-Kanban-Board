@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace KanbanBoard
 {
@@ -15,6 +16,7 @@ namespace KanbanBoard
         {
             Board = board;
             DisplayPipelines();
+            DisplayBoards();
         }
 
         #endregion
@@ -47,6 +49,24 @@ namespace KanbanBoard
         [Tooltip("Template used for initiating pipeline stages.")]
         private GameObject PipelineTemplate;
 
+
+
+        [Header("Boards")]
+
+        /// <summary>
+        /// References the parent holding all boards.
+        /// </summary>
+        [SerializeField]
+        [Tooltip("References the parent holding all boards.")]
+        private GameObject BoardsParent;
+
+        /// <summary>
+        /// Template used for initiating boards.
+        /// </summary>
+        [SerializeField]
+        [Tooltip("Template used for initiating boards.")]
+        private GameObject BoardTemplate;
+
         #endregion
 
         #region Pipeline Methods
@@ -72,6 +92,34 @@ namespace KanbanBoard
                 // Initialize data
                 script.Initialize(pipeline);
             }
+        }
+
+        /// <summary>
+        /// Display all boards
+        /// </summary>
+        private void DisplayBoards()
+        {
+            // Note: At the moment, we only support a single board. In the future, we will allow grouping and thus support multiple boards in the same kanban view.
+
+            // Clear all boards
+            foreach (Transform entity in BoardsParent.transform)
+                GameObject.Destroy(entity.gameObject);
+
+            // Create the board
+            {
+                // Create a new entity instance
+                GameObject board = Instantiate(BoardTemplate, BoardsParent.transform);
+
+                // Extract the script
+                KanbanBoardSection script = board.GetComponent<KanbanBoardSection>();
+
+                // Initialize data
+                script.Initialize(Board?.Items, Board?.Pipelines);
+            }
+
+            // Refresh layouts to scale properly
+            foreach (var layuout in BoardsParent.GetComponentsInChildren<RectTransform>())
+                LayoutRebuilder.ForceRebuildLayoutImmediate(layuout);
         }
 
         #endregion
