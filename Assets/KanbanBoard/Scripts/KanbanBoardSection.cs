@@ -18,7 +18,7 @@ namespace KanbanBoard
         public void Initialize(List<Item> items, List<Pipeline> pipelines)
         {
             Data = items ?? new List<Item>();
-            Columns = pipelines ?? new List<Pipeline>();
+            Pipelines = pipelines ?? new List<Pipeline>();
 
             InitializePipelines();
         }
@@ -35,7 +35,7 @@ namespace KanbanBoard
         /// <summary>
         /// A single column will be created for each pipeline.
         /// </summary>
-        public List<Pipeline> Columns { private set; get; }
+        public List<Pipeline> Pipelines { private set; get; }
 
 
 
@@ -59,6 +59,12 @@ namespace KanbanBoard
         [SerializeField]
         [Tooltip("Template used for initiating columns.")]
         private GameObject PipelineColumnTemplate;
+
+
+        /// <summary>
+        /// List of all columns created.
+        /// </summary>
+        private Dictionary<Guid, KanbanBoardColumn> Columns;
 
         #endregion
 
@@ -87,8 +93,8 @@ namespace KanbanBoard
                     GameObject.Destroy(entity.gameObject);
 
                 // Create columns
-                Dictionary<Guid, KanbanBoardColumn> columns = new Dictionary<Guid, KanbanBoardColumn>();
-                foreach (var pipeline in Columns)
+                Columns = new Dictionary<Guid, KanbanBoardColumn>();
+                foreach (var pipeline in Pipelines)
                 {
                     // Create a new entity instance
                     GameObject kanbanPipeline = Instantiate(PipelineColumnTemplate, PipelinesParent.transform);
@@ -97,14 +103,35 @@ namespace KanbanBoard
                     KanbanBoardColumn script = kanbanPipeline.GetComponent<KanbanBoardColumn>();
 
                     // Add to list
-                    columns.Add(pipeline.Id, script);
+                    Columns.Add(pipeline.Id, script);
                 }
 
                 // Populate the boards with their items
                 foreach (var item in Data)
-                    if (columns.ContainsKey(item.PipelineId))
-                        columns[item.PipelineId].Add(item);
+                    if (Columns.ContainsKey(item.PipelineId))
+                        Columns[item.PipelineId].Add(item);
+
+                // Update column heights
+                UpdateColumnHeights();
             }
+        }
+
+        /// <summary>
+        /// Updates the height of board.
+        /// </summary>
+        private void UpdateColumnHeights()
+        {
+            // Compute max height
+            float maxHeight = 0;
+            foreach (var column in Columns.Values)
+            {
+                float height = column.GetColumnMinHeight();
+                maxHeight = Math.Max(height, maxHeight);
+            }
+
+            // Set the height of the board
+            foreach (var column in Columns.Values)
+                column.SetColumnHeight(maxHeight);
         }
 
         #endregion
