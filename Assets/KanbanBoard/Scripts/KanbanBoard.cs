@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace KanbanBoard
 {
@@ -115,6 +116,10 @@ namespace KanbanBoard
                 // Initialize data
                 script.Initialize(Board?.Items, Board?.Pipelines);
             }
+
+            // Refresh layouts to scale properly
+            foreach (var layuout in BoardsParent.GetComponentsInChildren<RectTransform>())
+                LayoutRebuilder.ForceRebuildLayoutImmediate(layuout);
         }
 
         #endregion
