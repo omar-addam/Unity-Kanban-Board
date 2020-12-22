@@ -54,6 +54,13 @@ namespace KanbanBoard
         [Header("Boards")]
 
         /// <summary>
+        /// References the scroll view of boards.
+        /// </summary>
+        [SerializeField]
+        [Tooltip("References the scroll view of boards.")]
+        private ScrollRect BoardsScrollView;
+
+        /// <summary>
         /// References the parent holding all boards.
         /// </summary>
         [SerializeField]
