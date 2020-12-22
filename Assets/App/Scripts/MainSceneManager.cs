@@ -12,7 +12,7 @@ public class MainSceneManager : MonoBehaviour
     /// </summary>
     private void Awake()
     {
-        GenerateSample();
+        GenerateEmptySample();
     }
 
     #endregion
@@ -29,9 +29,9 @@ public class MainSceneManager : MonoBehaviour
     #region Methods
 
     /// <summary>
-    /// Generates a sample and displays it on the board.
+    /// Generates an empty sample and displays it on the board.
     /// </summary>
-    private void GenerateSample()
+    public void GenerateEmptySample()
     {
         // Create a new board
         KanbanBoard.DataStructure.Board board = new KanbanBoard.DataStructure.Board();
@@ -45,6 +45,33 @@ public class MainSceneManager : MonoBehaviour
         {
             toDoPipeline, inProgressPipeline, reviewPipeline, donePipeline
         });
+
+        // Display board
+        Board?.Initialize(board);
+    }
+
+    /// <summary>
+    /// Generates a full sample and displays it on the board.
+    /// </summary>
+    public void GenerateFullSample()
+    {
+        // Create a new board
+        KanbanBoard.DataStructure.Board board = new KanbanBoard.DataStructure.Board();
+
+        // Populate with pipelines
+        KanbanBoard.DataStructure.Pipeline toDoPipeline = new KanbanBoard.DataStructure.Pipeline("TO DO");
+        KanbanBoard.DataStructure.Pipeline inProgressPipeline = new KanbanBoard.DataStructure.Pipeline("IN PROGRESS");
+        KanbanBoard.DataStructure.Pipeline reviewPipeline = new KanbanBoard.DataStructure.Pipeline("REVIEW");
+        KanbanBoard.DataStructure.Pipeline donePipeline = new KanbanBoard.DataStructure.Pipeline("DONE");
+        board.Pipelines.AddRange(new List<KanbanBoard.DataStructure.Pipeline>()
+        {
+            toDoPipeline, inProgressPipeline, reviewPipeline, donePipeline
+        });
+
+        // Populate with items
+        board.Items.Add(new KanbanBoard.DataStructure.Item(toDoPipeline.Id));
+        board.Items.Add(new KanbanBoard.DataStructure.Item(toDoPipeline.Id));
+        board.Items.Add(new KanbanBoard.DataStructure.Item(toDoPipeline.Id));
 
         // Display board
         Board?.Initialize(board);
