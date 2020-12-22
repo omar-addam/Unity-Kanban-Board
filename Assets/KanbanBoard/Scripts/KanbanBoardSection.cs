@@ -80,6 +80,17 @@ namespace KanbanBoard
             {
                 EmptyUI.gameObject.SetActive(false);
                 PipelinesParent.gameObject.SetActive(true);
+
+                // Clear all columns
+                foreach (Transform entity in PipelinesParent.transform)
+                    GameObject.Destroy(entity.gameObject);
+
+                // Create columns
+                foreach (var pipeline in Columns)
+                {
+                    // Create a new entity instance
+                    GameObject kanbanPipeline = Instantiate(PipelineColumnTemplate, PipelinesParent.transform);
+                }
             }
         }
 
