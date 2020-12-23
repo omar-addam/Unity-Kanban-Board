@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,11 +13,11 @@ namespace KanbanBoard
         /// <summary>
         /// Initializes the data displayed in this board.
         /// </summary>
-        public void Initialize(DataStructure.Board board)
+        public void Initialize(DataStructure.Board board, bool groupByCategories = false)
         {
             Board = board;
             DisplayPipelines();
-            DisplayBoards();
+            DisplayBoards(groupByCategories);
         }
 
         /// <summary>
@@ -84,7 +85,7 @@ namespace KanbanBoard
 
         #endregion
 
-        #region Pipeline Methods
+        #region Methods
 
         /// <summary>
         /// Displays all pipelines.
@@ -112,7 +113,7 @@ namespace KanbanBoard
         /// <summary>
         /// Display all boards
         /// </summary>
-        private void DisplayBoards()
+        private void DisplayBoards(bool groupByCategories = false)
         {
             // Note: At the moment, we only support a single board. In the future, we will allow grouping and thus support multiple boards in the same kanban view.
 
@@ -120,7 +121,8 @@ namespace KanbanBoard
             foreach (Transform entity in BoardsParent.transform)
                 GameObject.Destroy(entity.gameObject);
 
-            // Create the board
+            // Create a single board
+            if (!groupByCategories)
             {
                 // Create a new entity instance
                 GameObject board = Instantiate(BoardTemplate, BoardsParent.transform);
@@ -130,6 +132,47 @@ namespace KanbanBoard
 
                 // Initialize data
                 script.Initialize(Board?.Items, Board?.Pipelines);
+            }
+
+            // Group by categories and create a board for each category
+            else
+            {
+                // Categorise the items
+                Dictionary<Guid, List<DataStructure.Item>> categorizedItems = new Dictionary<Guid, List<DataStructure.Item>>();
+                List<DataStructure.Item> otherItems = new List<DataStructure.Item>();
+                foreach (var category in Board?.Categories)
+                    categorizedItems.Add(category.Id, new List<DataStructure.Item>());
+                foreach (var item in Board?.Items)
+                    if (item.Category != null
+                        && categorizedItems.ContainsKey(item.Category.Id))
+                        categorizedItems[item.Category.Id].Add(item);
+                    else otherItems.Add(item);
+
+                // Create boards for categories
+                foreach (var category in Board?.Categories)
+                {
+                    // Create a new entity instance
+                    GameObject board = Instantiate(BoardTemplate, BoardsParent.transform);
+
+                    // Extract the script
+                    KanbanBoardSection script = board.GetComponent<KanbanBoardSection>();
+
+                    // Initialize data
+                    script.Initialize(categorizedItems[category.Id], Board?.Pipelines, true, category);
+                }
+
+                // CReate a board for others
+                if (otherItems.Count > 0)
+                {
+                    // Create a new entity instance
+                    GameObject board = Instantiate(BoardTemplate, BoardsParent.transform);
+
+                    // Extract the script
+                    KanbanBoardSection script = board.GetComponent<KanbanBoardSection>();
+
+                    // Initialize data
+                    script.Initialize(otherItems, Board?.Pipelines, true, null);
+                }
             }
 
             // Refresh layouts to scale properly
