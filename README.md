@@ -1,5 +1,7 @@
 # Unity-Kanban-Board
-A kanban board for displaying items as cards under their associated pipeline.
+
+This project provides the implementation of a kanban board for displaying items as cards under their associated pipeline. Kanban boards are commonly used to display and monitor progress. [- wikipedia](https://en.wikipedia.org/wiki/Kanban_board). 
+
 
 # Demo
 
