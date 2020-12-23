@@ -65,10 +65,10 @@ namespace KanbanBoard.DataStructure
 
 
         /// <summary>
-        /// Then name of the pipeline stage.
+        /// The name of the pipeline stage.
         /// </summary>
         [SerializeField]
-        [Tooltip("Then name of the pipeline stage.")]
+        [Tooltip("The name of the pipeline stage.")]
         private string _Name;
 
         /// <summary>
