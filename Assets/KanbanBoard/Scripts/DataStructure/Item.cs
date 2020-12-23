@@ -13,7 +13,7 @@ namespace KanbanBoard.DataStructure
         /// Empty constructor.
         /// </summary>
         public Item()
-            : this(Guid.NewGuid())
+            : this(new Pipeline())
         {
         }
 
