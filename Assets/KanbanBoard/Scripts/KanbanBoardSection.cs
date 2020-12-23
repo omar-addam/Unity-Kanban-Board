@@ -35,6 +35,20 @@ namespace KanbanBoard
             Pipelines = pipelines ?? new List<Pipeline>();
 
             InitializePipelines(dispalyHeader);
+
+            // Setup header click
+            if (dispalyHeader)
+            {
+                Button headerButton = CategoryParent.GetComponentInChildren<Button>();
+                headerButton.onClick.RemoveAllListeners();
+                headerButton.onClick.AddListener(() =>
+                {
+                    if (IsCollapsed)
+                        Expand();
+                    else
+                        Collapse();
+                });
+            }
         }
 
         #endregion
@@ -55,6 +69,17 @@ namespace KanbanBoard
         /// A single column will be created for each pipeline.
         /// </summary>
         public List<Pipeline> Pipelines { private set; get; }
+
+        /// <summary>
+        /// States if the board is currently collapsed.
+        /// </summary>
+        public bool IsCollapsed
+        {
+            get
+            {
+                return !EmptyUI.gameObject.activeSelf && !PipelinesParent.gameObject.activeSelf;
+            }
+        }
 
 
 
@@ -195,6 +220,8 @@ namespace KanbanBoard
         {
             EmptyUI.gameObject.SetActive(false);
             PipelinesParent.gameObject.SetActive(false);
+            ExpandedStatus.SetActive(true);
+            CollapsedStatus.SetActive(false);
         }
 
         /// <summary>
@@ -204,6 +231,8 @@ namespace KanbanBoard
         {
             EmptyUI.gameObject.SetActive(Data.Count == 0);
             PipelinesParent.gameObject.SetActive(Data.Count != 0);
+            ExpandedStatus.SetActive(false);
+            CollapsedStatus.SetActive(true);
         }
 
         /// <summary>
