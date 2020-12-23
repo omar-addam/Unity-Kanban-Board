@@ -69,10 +69,10 @@ public class MainSceneManager : MonoBehaviour
         });
 
         // Populate with items
-        board.Items.Add(new KanbanBoard.DataStructure.Item(toDoPipeline.Id));
-        board.Items.Add(new KanbanBoard.DataStructure.Item(toDoPipeline.Id));
-        board.Items.Add(new KanbanBoard.DataStructure.Item(toDoPipeline.Id));
-        board.Items.Add(new KanbanBoard.DataStructure.Item(reviewPipeline.Id));
+        board.Items.Add(new KanbanBoard.DataStructure.Item(toDoPipeline));
+        board.Items.Add(new KanbanBoard.DataStructure.Item(toDoPipeline));
+        board.Items.Add(new KanbanBoard.DataStructure.Item(toDoPipeline));
+        board.Items.Add(new KanbanBoard.DataStructure.Item(reviewPipeline));
 
         // Display board
         Board?.Initialize(board);
@@ -97,21 +97,21 @@ public class MainSceneManager : MonoBehaviour
         });
 
         // Populate with items
-        board.Items.Add(new KanbanBoard.DataStructure.Item(toDoPipeline.Id));
-        board.Items.Add(new KanbanBoard.DataStructure.Item(toDoPipeline.Id));
-        board.Items.Add(new KanbanBoard.DataStructure.Item(toDoPipeline.Id));
-        board.Items.Add(new KanbanBoard.DataStructure.Item(toDoPipeline.Id));
-        board.Items.Add(new KanbanBoard.DataStructure.Item(toDoPipeline.Id));
-        board.Items.Add(new KanbanBoard.DataStructure.Item(toDoPipeline.Id));
-        board.Items.Add(new KanbanBoard.DataStructure.Item(toDoPipeline.Id));
-        board.Items.Add(new KanbanBoard.DataStructure.Item(toDoPipeline.Id));
-        board.Items.Add(new KanbanBoard.DataStructure.Item(toDoPipeline.Id));
-        board.Items.Add(new KanbanBoard.DataStructure.Item(toDoPipeline.Id));
-        board.Items.Add(new KanbanBoard.DataStructure.Item(toDoPipeline.Id));
-        board.Items.Add(new KanbanBoard.DataStructure.Item(toDoPipeline.Id));
-        board.Items.Add(new KanbanBoard.DataStructure.Item(toDoPipeline.Id));
-        board.Items.Add(new KanbanBoard.DataStructure.Item(toDoPipeline.Id));
-        board.Items.Add(new KanbanBoard.DataStructure.Item(reviewPipeline.Id));
+        board.Items.Add(new KanbanBoard.DataStructure.Item(toDoPipeline));
+        board.Items.Add(new KanbanBoard.DataStructure.Item(toDoPipeline));
+        board.Items.Add(new KanbanBoard.DataStructure.Item(toDoPipeline));
+        board.Items.Add(new KanbanBoard.DataStructure.Item(toDoPipeline));
+        board.Items.Add(new KanbanBoard.DataStructure.Item(toDoPipeline));
+        board.Items.Add(new KanbanBoard.DataStructure.Item(toDoPipeline));
+        board.Items.Add(new KanbanBoard.DataStructure.Item(toDoPipeline));
+        board.Items.Add(new KanbanBoard.DataStructure.Item(toDoPipeline));
+        board.Items.Add(new KanbanBoard.DataStructure.Item(toDoPipeline));
+        board.Items.Add(new KanbanBoard.DataStructure.Item(toDoPipeline));
+        board.Items.Add(new KanbanBoard.DataStructure.Item(toDoPipeline));
+        board.Items.Add(new KanbanBoard.DataStructure.Item(toDoPipeline));
+        board.Items.Add(new KanbanBoard.DataStructure.Item(toDoPipeline));
+        board.Items.Add(new KanbanBoard.DataStructure.Item(toDoPipeline));
+        board.Items.Add(new KanbanBoard.DataStructure.Item(reviewPipeline));
 
         // Display board
         Board?.Initialize(board);

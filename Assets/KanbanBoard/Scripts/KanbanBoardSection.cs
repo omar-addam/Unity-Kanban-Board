@@ -109,8 +109,9 @@ namespace KanbanBoard
 
                 // Populate the boards with their items
                 foreach (var item in Data)
-                    if (Columns.ContainsKey(item.PipelineId))
-                        Columns[item.PipelineId].Add(item);
+                    if (item.Pipeline != null
+                        && Columns.ContainsKey(item.Pipeline.Id))
+                        Columns[item.Pipeline.Id].Add(item);
 
                 // Update column heights
                 UpdateColumnHeights();
