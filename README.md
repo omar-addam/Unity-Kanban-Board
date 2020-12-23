@@ -7,7 +7,7 @@ This project provides the implementation of a kanban board for displaying items 
 
 ![Simulation](docs/Simulation.gif)
 
-We created a demo that visualizes different features provided by our kanban view.
+We created a WebGL application that demonstrates different features provided by our kanban view.
 A complete demo can be found on [https://omaddam.github.io/Unity-Kanban-Board/](https://omaddam.github.io/Unity-Kanban-Board/).
 
 # Getting Started
