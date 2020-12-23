@@ -189,6 +189,24 @@ namespace KanbanBoard
         }
 
         /// <summary>
+        /// Expands the board.
+        /// </summary>
+        public void Expand()
+        {
+            EmptyUI.gameObject.SetActive(false);
+            PipelinesParent.gameObject.SetActive(false);
+        }
+
+        /// <summary>
+        /// Collapse the board.
+        /// </summary>
+        public void Collapse()
+        {
+            EmptyUI.gameObject.SetActive(Data.Count == 0);
+            PipelinesParent.gameObject.SetActive(Data.Count != 0);
+        }
+
+        /// <summary>
         /// Updates the height of board.
         /// </summary>
         private void UpdateColumnHeights()
