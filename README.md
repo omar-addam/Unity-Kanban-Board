@@ -27,7 +27,7 @@ A step by step guide to get you started with development.
 #### Download, clone, and setup the repository
 
 ```git
-git clone https://github.com/omaddam/Force-Directed-Graph.git
+git clone https://github.com/omaddam/Unity-Kanban-Board.git
 ```
 
 #### Initialize git flow
