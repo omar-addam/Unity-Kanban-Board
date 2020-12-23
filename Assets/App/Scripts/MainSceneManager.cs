@@ -138,9 +138,10 @@ public class MainSceneManager : MonoBehaviour
         // Populate with categories
         KanbanBoard.DataStructure.Category category1 = new KanbanBoard.DataStructure.Category("Category 1");
         KanbanBoard.DataStructure.Category category2 = new KanbanBoard.DataStructure.Category("Category 2");
+        KanbanBoard.DataStructure.Category category3 = new KanbanBoard.DataStructure.Category("Category 3");
         board.Categories.AddRange(new List<KanbanBoard.DataStructure.Category>()
         {
-            category1, category2
+            category1, category2, category3
         });
 
         // Populate with items
