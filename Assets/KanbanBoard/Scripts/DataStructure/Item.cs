@@ -22,7 +22,7 @@ namespace KanbanBoard.DataStructure
         /// </summary>
         /// <param name="pipeline">The pipeline stage this item is currently at.</param>
         public Item(Pipeline pipeline)
-            : this(Guid.NewGuid(), pipeline)
+            : this(Guid.NewGuid(), pipeline, null)
         {
         }
 
@@ -31,10 +31,11 @@ namespace KanbanBoard.DataStructure
         /// <param name="id">Unique identifier used to track a board item.</param>
         /// <param name="pipeline">The pipeline stage this item is currently at.</param>
         /// </summary>
-        public Item(Guid id, Pipeline pipeline)
+        public Item(Guid id, Pipeline pipeline, Category category)
         {
             _Id = id;
             _Pipeline = pipeline;
+            _Category = category;
         }
 
         /// <summary>
@@ -42,7 +43,7 @@ namespace KanbanBoard.DataStructure
         /// </summary>
         /// <param name="item">Instance to clone.</param>
         public Item(Item item)
-            : this(item.Id, item.Pipeline)
+            : this(item.Id, item.Pipeline, item._Category)
         {
         }
 
@@ -75,6 +76,20 @@ namespace KanbanBoard.DataStructure
         /// The pipeline stage this item is currently at.
         /// </summary>
         public Pipeline Pipeline { get { return _Pipeline; } }
+
+
+
+        /// <summary>
+        /// The category this item is belongs to.
+        /// </summary>
+        [SerializeField]
+        [Tooltip("The category this item is belongs to.")]
+        private Category _Category;
+
+        /// <summary>
+        /// The category this item is belongs to.
+        /// </summary>
+        public Category Category { get { return _Category; } }
 
         #endregion
 
