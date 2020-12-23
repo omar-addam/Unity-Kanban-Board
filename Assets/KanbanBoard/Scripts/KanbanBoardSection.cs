@@ -39,12 +39,29 @@ namespace KanbanBoard
 
 
 
+        [Header("Category")]
+
+        /// <summary>
+        /// The UI element used to inform users that the board is empty.
+        /// </summary>
+        [SerializeField]
+        [Tooltip("References the parent holding the category information.")]
+        private GameObject CategoryParent;
+
+
+
+        [Header("Empty")]
+
         /// <summary>
         /// The UI element used to inform users that the board is empty.
         /// </summary>
         [SerializeField]
         [Tooltip("The UI element used to inform users that the board is empty.")]
         private Text EmptyUI;
+
+
+
+        [Header("Board")]
 
         /// <summary>
         /// References the parent holding all the pipelines and their items. 
@@ -59,8 +76,6 @@ namespace KanbanBoard
         [SerializeField]
         [Tooltip("Template used for initiating columns.")]
         private GameObject PipelineColumnTemplate;
-
-
 
         /// <summary>
         /// List of all columns created.

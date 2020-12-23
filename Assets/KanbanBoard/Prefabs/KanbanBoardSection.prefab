@@ -541,7 +541,7 @@ GameObject:
   - component: {fileID: 150115371068170541}
   - component: {fileID: 5618841099392099571}
   m_Layer: 5
-  m_Name: Title
+  m_Name: Category
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -755,7 +755,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 0
-  m_Spacing: 0
+  m_Spacing: 10
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 1
@@ -789,6 +789,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb4c9de8701915942afb8120fe41cb10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CategoryParent: {fileID: 8078795251473358648}
   EmptyUI: {fileID: 7703731658270758798}
   PipelinesParent: {fileID: 7800390249447555088}
   PipelineColumnTemplate: {fileID: 7503987912806032807, guid: b38d0cd890935ec4688281b4fc1872ef, type: 3}
