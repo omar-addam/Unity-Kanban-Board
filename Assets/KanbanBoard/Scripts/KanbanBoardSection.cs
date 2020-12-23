@@ -42,11 +42,39 @@ namespace KanbanBoard
         [Header("Category")]
 
         /// <summary>
-        /// The UI element used to inform users that the board is empty.
+        /// References the parent holding the category information.
         /// </summary>
         [SerializeField]
         [Tooltip("References the parent holding the category information.")]
         private GameObject CategoryParent;
+
+        /// <summary>
+        /// The UI element used to inform users that the board is expanded.
+        /// </summary>
+        [SerializeField]
+        [Tooltip("The UI element used to inform users that the board is expanded.")]
+        private GameObject ExpandedStatus;
+
+        /// <summary>
+        /// The UI element used to inform users that the board is collapsed.
+        /// </summary>
+        [SerializeField]
+        [Tooltip("The UI element used to inform users that the board is collapsed.")]
+        private GameObject CollapsedStatus;
+
+        /// <summary>
+        /// The UI element used to display the name of the category.
+        /// </summary>
+        [SerializeField]
+        [Tooltip("The UI element used to display the name of the category.")]
+        private Text CategoryNameText;
+
+        /// <summary>
+        /// The UI element used to display the number of items it contains.
+        /// </summary>
+        [SerializeField]
+        [Tooltip("The UI element used to display the number of items it contains.")]
+        private Text CategoryItemsCountText;
 
 
 

@@ -790,6 +790,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CategoryParent: {fileID: 8078795251473358648}
+  ExpandedStatus: {fileID: 959400376179787656}
+  CollapsedStatus: {fileID: 1160512771506170950}
+  CategoryNameText: {fileID: 8839521655196147258}
+  CategoryItemsCountText: {fileID: 849284034015994675}
   EmptyUI: {fileID: 7703731658270758798}
   PipelinesParent: {fileID: 7800390249447555088}
   PipelineColumnTemplate: {fileID: 7503987912806032807, guid: b38d0cd890935ec4688281b4fc1872ef, type: 3}
