@@ -10,22 +10,57 @@ namespace KanbanBoard
     public class KanbanBoardSection : MonoBehaviour
     {
 
+        #region Constants
+
+        /// <summary>
+        /// The name displayed on the header when not provided with a category.
+        /// </summary>
+        private const string OTHERS_CATEGORY = "Others";
+
+        #endregion
+
         #region Initialization
 
         /// <summary>
         /// Initializes the content of the pipeline.
         /// </summary>
-        public void Initialize(List<Item> items, List<Pipeline> pipelines)
+        /// <param name="items">All items to display in this board.</param>
+        /// <param name="pipelines">All pipelines used to classify the items under separate columns.</param>
+        /// <param name="dispalyHeader">State if we should display header or not.</param>
+        /// <param name="category">Contains the information of the header. If null => Others.</param>
+        public void Initialize(List<Item> items, List<Pipeline> pipelines, bool dispalyHeader = false, Category category = null)
         {
+            Category = category;
             Data = items ?? new List<Item>();
             Pipelines = pipelines ?? new List<Pipeline>();
 
-            InitializePipelines();
+            InitializePipelines(dispalyHeader);
+
+            Expand();
+
+            // Setup header click
+            if (dispalyHeader)
+            {
+                Button headerButton = CategoryParent.GetComponentInChildren<Button>();
+                headerButton.onClick.RemoveAllListeners();
+                headerButton.onClick.AddListener(() =>
+                {
+                    if (IsCollapsed)
+                        Expand();
+                    else
+                        Collapse();
+                });
+            }
         }
 
         #endregion
 
         #region Fields/Properties
+
+        /// <summary>
+        /// The category being presented by this board.
+        /// </summary>
+        public Category Category { private set; get; }
 
         /// <summary>
         /// Items displayed in this board.
@@ -37,7 +72,59 @@ namespace KanbanBoard
         /// </summary>
         public List<Pipeline> Pipelines { private set; get; }
 
+        /// <summary>
+        /// States if the board is currently collapsed.
+        /// </summary>
+        public bool IsCollapsed
+        {
+            get
+            {
+                return !EmptyUI.gameObject.activeSelf && !PipelinesParent.gameObject.activeSelf;
+            }
+        }
 
+
+
+        [Header("Category")]
+
+        /// <summary>
+        /// References the parent holding the category information.
+        /// </summary>
+        [SerializeField]
+        [Tooltip("References the parent holding the category information.")]
+        private GameObject CategoryParent;
+
+        /// <summary>
+        /// The UI element used to inform users that the board is expanded.
+        /// </summary>
+        [SerializeField]
+        [Tooltip("The UI element used to inform users that the board is expanded.")]
+        private GameObject ExpandedStatus;
+
+        /// <summary>
+        /// The UI element used to inform users that the board is collapsed.
+        /// </summary>
+        [SerializeField]
+        [Tooltip("The UI element used to inform users that the board is collapsed.")]
+        private GameObject CollapsedStatus;
+
+        /// <summary>
+        /// The UI element used to display the name of the category.
+        /// </summary>
+        [SerializeField]
+        [Tooltip("The UI element used to display the name of the category.")]
+        private Text CategoryNameText;
+
+        /// <summary>
+        /// The UI element used to display the number of items it contains.
+        /// </summary>
+        [SerializeField]
+        [Tooltip("The UI element used to display the number of items it contains.")]
+        private Text CategoryItemsCountText;
+
+
+
+        [Header("Empty")]
 
         /// <summary>
         /// The UI element used to inform users that the board is empty.
@@ -45,6 +132,10 @@ namespace KanbanBoard
         [SerializeField]
         [Tooltip("The UI element used to inform users that the board is empty.")]
         private Text EmptyUI;
+
+
+
+        [Header("Board")]
 
         /// <summary>
         /// References the parent holding all the pipelines and their items. 
@@ -60,8 +151,6 @@ namespace KanbanBoard
         [Tooltip("Template used for initiating columns.")]
         private GameObject PipelineColumnTemplate;
 
-
-
         /// <summary>
         /// List of all columns created.
         /// </summary>
@@ -74,8 +163,16 @@ namespace KanbanBoard
         /// <summary>
         /// Displays the panels for each pipeline.
         /// </summary>
-        private void InitializePipelines()
+        private void InitializePipelines(bool displayHeader = false)
         {
+            // Display header
+            CategoryParent.SetActive(displayHeader);
+            if (displayHeader)
+            {
+                CategoryNameText.text = Category?.Name ?? OTHERS_CATEGORY;
+                CategoryItemsCountText.text = string.Format("{0} item{1}", Data.Count.ToString("N0"), Data.Count == 1 ? "" : "s");
+            }
+
             // Empty
             if (Data.Count == 0)
             {
@@ -109,12 +206,37 @@ namespace KanbanBoard
 
                 // Populate the boards with their items
                 foreach (var item in Data)
-                    if (Columns.ContainsKey(item.PipelineId))
-                        Columns[item.PipelineId].Add(item);
+                    if (item.Pipeline != null
+                        && Columns.ContainsKey(item.Pipeline.Id))
+                        Columns[item.Pipeline.Id].Add(item);
 
                 // Update column heights
                 UpdateColumnHeights();
             }
+        }
+
+        /// <summary>
+        /// Expands the board.
+        /// </summary>
+        public void Expand()
+        {
+            EmptyUI.gameObject.SetActive(Data.Count == 0);
+            PipelinesParent.gameObject.SetActive(Data.Count != 0);
+            ExpandedStatus.SetActive(true);
+            CollapsedStatus.SetActive(false);
+            GetComponentInParent<KanbanBoard>().RefreshLayoutContents();
+        }
+
+        /// <summary>
+        /// Collapse the board.
+        /// </summary>
+        public void Collapse()
+        {
+            EmptyUI.gameObject.SetActive(false);
+            PipelinesParent.gameObject.SetActive(false);
+            ExpandedStatus.SetActive(false);
+            CollapsedStatus.SetActive(true);
+            GetComponentInParent<KanbanBoard>().RefreshLayoutContents();
         }
 
         /// <summary>

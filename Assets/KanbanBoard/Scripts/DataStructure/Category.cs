@@ -4,7 +4,7 @@ using UnityEngine;
 namespace KanbanBoard.DataStructure
 {
     [Serializable]
-    public class Pipeline
+    public class Category
     {
 
         #region Constructors
@@ -12,7 +12,7 @@ namespace KanbanBoard.DataStructure
         /// <summary>
         /// Empty constructor.
         /// </summary>
-        public Pipeline()
+        public Category()
             : this(Guid.NewGuid(), "N/A")
         {
         }
@@ -20,18 +20,18 @@ namespace KanbanBoard.DataStructure
         /// <summary>
         /// Minimal constructor.
         /// </summary>
-        /// <param name="name">Then name of the pipeline stage.</param>
-        public Pipeline(string name)
+        /// <param name="name">Then name of the category.</param>
+        public Category(string name)
             : this(Guid.NewGuid(), name)
         {
         }
 
         /// <summary>
         /// Default constructor.
-        /// <param name="id">Unique identifier used by items to link them to this pipeline.</param>
-        /// <param name="name">Then name of the pipeline stage.</param>
+        /// <param name="id">Unique identifier used by items to link them to this category.</param>
+        /// <param name="name">Then name of the category.</param>
         /// </summary>
-        public Pipeline(Guid id, string name)
+        public Category(Guid id, string name)
         {
             _Id = id;
             _Name = name;
@@ -41,7 +41,7 @@ namespace KanbanBoard.DataStructure
         /// Clone constructor.
         /// </summary>
         /// <param name="item">Instance to clone.</param>
-        public Pipeline(Pipeline item)
+        public Category(Category item)
             : this(item.Id, item.Name)
         {
         }
@@ -51,28 +51,28 @@ namespace KanbanBoard.DataStructure
         #region Fields/Properties
 
         /// <summary>
-        /// Unique identifier used by items to link them to this pipeline.
+        /// Unique identifier used by items to link them to this category.
         /// </summary>
         [SerializeField]
-        [Tooltip("Unique identifier used by items to link them to this pipeline.")]
+        [Tooltip("Unique identifier used by items to link them to this category.")]
         private Guid _Id;
 
         /// <summary>
-        /// Unique identifier used by items to link them to this pipeline.
+        /// Unique identifier used by items to link them to this category.
         /// </summary>
         public Guid Id { get { return _Id; } }
 
 
 
         /// <summary>
-        /// The name of the pipeline stage.
+        /// The name of the category.
         /// </summary>
         [SerializeField]
-        [Tooltip("The name of the pipeline stage.")]
+        [Tooltip("The name of the category.")]
         private string _Name;
 
         /// <summary>
-        /// The pipeline stage this item is currently at.
+        /// The name of the category.
         /// </summary>
         public string Name { get { return _Name; } }
 
@@ -81,7 +81,7 @@ namespace KanbanBoard.DataStructure
         #region Methods
 
         /// <summary>
-        /// Uses the id of the pipeline for hash coding.
+        /// Uses the id of the category for hash coding.
         /// </summary>
         public override int GetHashCode()
         {
@@ -89,7 +89,7 @@ namespace KanbanBoard.DataStructure
         }
 
         /// <summary>
-        /// Uses the id of the pipeline for comparison.
+        /// Uses the id of the category for comparison.
         /// </summary>
         public override bool Equals(object obj)
         {
@@ -98,7 +98,7 @@ namespace KanbanBoard.DataStructure
         }
 
         /// <summary>
-        /// Displays the name of the pipeline.
+        /// Displays the name of the category.
         /// </summary>
         public override string ToString()
         {

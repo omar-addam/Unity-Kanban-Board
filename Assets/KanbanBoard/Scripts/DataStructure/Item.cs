@@ -13,28 +13,29 @@ namespace KanbanBoard.DataStructure
         /// Empty constructor.
         /// </summary>
         public Item()
-            : this(Guid.NewGuid())
+            : this(new Pipeline())
         {
         }
 
         /// <summary>
         /// Minimal constructor.
         /// </summary>
-        /// <param name="pipelineId">The pipeline stage this item is currently at.</param>
-        public Item(Guid pipelineId)
-            : this(Guid.NewGuid(), pipelineId)
+        /// <param name="pipeline">The pipeline stage this item is currently at.</param>
+        public Item(Pipeline pipeline)
+            : this(Guid.NewGuid(), pipeline, null)
         {
         }
 
         /// <summary>
         /// Default constructor.
         /// <param name="id">Unique identifier used to track a board item.</param>
-        /// <param name="pipelineId">The pipeline stage this item is currently at.</param>
+        /// <param name="pipeline">The pipeline stage this item is currently at.</param>
         /// </summary>
-        public Item(Guid id, Guid pipelineId)
+        public Item(Guid id, Pipeline pipeline, Category category)
         {
             _Id = id;
-            _PipelineId = pipelineId;
+            _Pipeline = pipeline;
+            _Category = category;
         }
 
         /// <summary>
@@ -42,7 +43,7 @@ namespace KanbanBoard.DataStructure
         /// </summary>
         /// <param name="item">Instance to clone.</param>
         public Item(Item item)
-            : this(item.Id, item.PipelineId)
+            : this(item.Id, item.Pipeline, item._Category)
         {
         }
 
@@ -69,12 +70,26 @@ namespace KanbanBoard.DataStructure
         /// </summary>
         [SerializeField]
         [Tooltip("The pipeline stage this item is currently at.")]
-        private Guid _PipelineId;
+        private Pipeline _Pipeline;
 
         /// <summary>
         /// The pipeline stage this item is currently at.
         /// </summary>
-        public Guid PipelineId { get { return _PipelineId; } }
+        public Pipeline Pipeline { get { return _Pipeline; } }
+
+
+
+        /// <summary>
+        /// The category this item is belongs to.
+        /// </summary>
+        [SerializeField]
+        [Tooltip("The category this item is belongs to.")]
+        private Category _Category;
+
+        /// <summary>
+        /// The category this item is belongs to.
+        /// </summary>
+        public Category Category { get { return _Category; } }
 
         #endregion
 

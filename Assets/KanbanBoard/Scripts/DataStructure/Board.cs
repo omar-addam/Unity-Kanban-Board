@@ -14,18 +14,20 @@ namespace KanbanBoard.DataStructure
         /// Empty constructor.
         /// </summary>
         public Board()
-            : this(new List<Pipeline>(), new List<Item>())
+            : this(new List<Pipeline>(), new List<Category>(), new List<Item>())
         {
         }
 
         /// <summary>
         /// Default constructor.
         /// <param name="pipelines">List of all pipelines in the board.</param>
+        /// <param name="categories">List of all categories in the board.</param>
         /// <param name="items">List of all items in the board.</param>
         /// </summary>
-        public Board(List<Pipeline> pipelines, List<Item> items)
+        public Board(List<Pipeline> pipelines, List<Category> categories, List<Item> items)
         {
             _Pipelines = pipelines;
+            _Categories = categories;
             _Items = items;
         }
 
@@ -39,6 +41,10 @@ namespace KanbanBoard.DataStructure
             // Clone the pipelines
             foreach (var pipeline in board.Pipelines)
                 _Pipelines.Add(new Pipeline(pipeline));
+
+            // Clone the categories
+            foreach (var category in board.Categories)
+                _Categories.Add(new Category(category));
 
             // Clone the items
             foreach (var item in board.Items)
@@ -64,6 +70,20 @@ namespace KanbanBoard.DataStructure
 
 
         /// <summary>
+        /// List of all categories in the board.
+        /// </summary>
+        [SerializeField]
+        [Tooltip("List of all categories in the board.")]
+        private List<Category> _Categories;
+
+        /// <summary>
+        /// List of all categories in the board.
+        /// </summary>
+        public List<Category> Categories { get { return _Categories; } }
+
+
+
+        /// <summary>
         /// List of all items in the board.
         /// </summary>
         [SerializeField]
@@ -84,7 +104,7 @@ namespace KanbanBoard.DataStructure
         /// </summary>
         public override string ToString()
         {
-            return string.Format("#Pipelines: {0} | #Items: {1}", _Pipelines?.Count, _Items?.Count);
+            return string.Format("#Pipelines: {0} | #Categories: {1} | #Items: {2}", _Pipelines?.Count, _Categories?.Count, _Items?.Count);
         }
 
         #endregion
