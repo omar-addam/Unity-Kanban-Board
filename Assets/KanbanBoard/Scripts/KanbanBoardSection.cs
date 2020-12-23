@@ -36,6 +36,8 @@ namespace KanbanBoard
 
             InitializePipelines(dispalyHeader);
 
+            Expand();
+
             // Setup header click
             if (dispalyHeader)
             {
@@ -218,10 +220,11 @@ namespace KanbanBoard
         /// </summary>
         public void Expand()
         {
-            EmptyUI.gameObject.SetActive(false);
-            PipelinesParent.gameObject.SetActive(false);
+            EmptyUI.gameObject.SetActive(Data.Count == 0);
+            PipelinesParent.gameObject.SetActive(Data.Count != 0);
             ExpandedStatus.SetActive(true);
             CollapsedStatus.SetActive(false);
+            GetComponentInParent<KanbanBoard>().RefreshLayoutContents();
         }
 
         /// <summary>
@@ -229,10 +232,11 @@ namespace KanbanBoard
         /// </summary>
         public void Collapse()
         {
-            EmptyUI.gameObject.SetActive(Data.Count == 0);
-            PipelinesParent.gameObject.SetActive(Data.Count != 0);
+            EmptyUI.gameObject.SetActive(false);
+            PipelinesParent.gameObject.SetActive(false);
             ExpandedStatus.SetActive(false);
             CollapsedStatus.SetActive(true);
+            GetComponentInParent<KanbanBoard>().RefreshLayoutContents();
         }
 
         /// <summary>

@@ -176,8 +176,7 @@ namespace KanbanBoard
             }
 
             // Refresh layouts to scale properly
-            foreach (var layuout in BoardsParent.GetComponentsInChildren<RectTransform>())
-                LayoutRebuilder.ForceRebuildLayoutImmediate(layuout);
+            RefreshLayoutContents();
         }
 
         /// <summary>
@@ -204,6 +203,15 @@ namespace KanbanBoard
             {
                 header.offsetMax = new Vector2(-header.offsetMin.x, header.offsetMax.y);
             }
+        }
+
+        /// <summary>
+        /// Refreshes all layouts and their contents to fix their alignment.
+        /// </summary>
+        public void RefreshLayoutContents()
+        {
+            foreach (var layuout in BoardsParent.GetComponentsInChildren<RectTransform>())
+                LayoutRebuilder.ForceRebuildLayoutImmediate(layuout);
         }
 
         #endregion
