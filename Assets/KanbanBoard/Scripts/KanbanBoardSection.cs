@@ -10,22 +10,41 @@ namespace KanbanBoard
     public class KanbanBoardSection : MonoBehaviour
     {
 
+        #region Constants
+
+        /// <summary>
+        /// The name displayed on the header when not provided with a category.
+        /// </summary>
+        private const string OTHERS_CATEGORY = "Others";
+
+        #endregion
+
         #region Initialization
 
         /// <summary>
         /// Initializes the content of the pipeline.
         /// </summary>
-        public void Initialize(List<Item> items, List<Pipeline> pipelines)
+        /// <param name="items">All items to display in this board.</param>
+        /// <param name="pipelines">All pipelines used to classify the items under separate columns.</param>
+        /// <param name="dispalyHeader">State if we should display header or not.</param>
+        /// <param name="category">Contains the information of the header. If null => Others.</param>
+        public void Initialize(List<Item> items, List<Pipeline> pipelines, bool dispalyHeader = false, Category category = null)
         {
+            Category = category;
             Data = items ?? new List<Item>();
             Pipelines = pipelines ?? new List<Pipeline>();
 
-            InitializePipelines();
+            InitializePipelines(dispalyHeader);
         }
 
         #endregion
 
         #region Fields/Properties
+
+        /// <summary>
+        /// The category being presented by this board.
+        /// </summary>
+        public Category Category { private set; get; }
 
         /// <summary>
         /// Items displayed in this board.
@@ -117,8 +136,16 @@ namespace KanbanBoard
         /// <summary>
         /// Displays the panels for each pipeline.
         /// </summary>
-        private void InitializePipelines()
+        private void InitializePipelines(bool displayHeader = false)
         {
+            // Display header
+            CategoryParent.SetActive(displayHeader);
+            if (displayHeader)
+            {
+                CategoryNameText.text = Category?.Name ?? OTHERS_CATEGORY;
+                CategoryItemsCountText.text = string.Format("{0} item{1}", Data.Count.ToString("N0"), Data.Count == 1 ? "" : "s");
+            }
+
             // Empty
             if (Data.Count == 0)
             {
