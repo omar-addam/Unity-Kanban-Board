@@ -2,6 +2,14 @@
 
 This project provides the implementation of a kanban board for displaying items as cards under their associated pipeline. Kanban boards are commonly used to display and monitor progress. [- wikipedia](https://en.wikipedia.org/wiki/Kanban_board). 
 
+This kanban board provides the following features:
+
+
+| Setting pipline stages and adding items | Handling empty lists | 
+| :-----: | :-------: |
+| <img src="docs/FeatureBoard.PNG" height="200" /> | <img src="docs/FeatureEmpty.PNG" height="200" /> |
+| Scrollable with bigger datasets | Grouping |
+| <img src="docs/FeatureScrollbar.PNG" height="200" /> | <img src="docs/FeatureGroups.PNG" height="200" /> |
 
 # Demo
 
