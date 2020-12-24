@@ -44,6 +44,89 @@ git clone https://github.com/omaddam/Unity-Kanban-Board.git
 git flow init
 ```
 
+# How to use this board in your project?
+
+### 1. Add prefab
+Create a canvas in your scene and add KanbadBoard.prefab underneath it then reference its manager in your script. `The prefab can be found under Assets/KanbanBoard/Prefabs.`
+
+![Step1](docs/Step1.png)
+
+### 2. Prepare data
+Create a `KanbanBoard.DataStructure.Board` instance and populate it with the pipeline stages, categories, and items.
+
+Every pipleine has the following fields:
+* Unique identifier
+* Display name
+  
+Every category has the following fields:
+* Unique identifier
+* Display name
+
+Every Item has the following fields:
+* Unique identifier
+* The pipeline stage it is currently at
+* The category it belongs to (optional)
+
+```C#
+using UnityEngine;
+using System;
+
+// Create a new board
+KanbanBoard.DataStructure.Board board = new KanbanBoard.DataStructure.Board();
+
+// Populate with pipelines
+KanbanBoard.DataStructure.Pipeline toDoPipeline = new KanbanBoard.DataStructure.Pipeline("TO DO");
+KanbanBoard.DataStructure.Pipeline inProgressPipeline = new KanbanBoard.DataStructure.Pipeline("IN PROGRESS");
+KanbanBoard.DataStructure.Pipeline reviewPipeline = new KanbanBoard.DataStructure.Pipeline("REVIEW");
+KanbanBoard.DataStructure.Pipeline donePipeline = new KanbanBoard.DataStructure.Pipeline("DONE");
+board.Pipelines.AddRange(new List<KanbanBoard.DataStructure.Pipeline>()
+{
+    toDoPipeline, inProgressPipeline, reviewPipeline, donePipeline
+});
+
+// Populate with categories
+KanbanBoard.DataStructure.Category category1 = new KanbanBoard.DataStructure.Category("Category 1");
+KanbanBoard.DataStructure.Category category2 = new KanbanBoard.DataStructure.Category("Category 2");
+KanbanBoard.DataStructure.Category category3 = new KanbanBoard.DataStructure.Category("Category 3");
+board.Categories.AddRange(new List<KanbanBoard.DataStructure.Category>()
+{
+    category1, category2, category3
+});
+
+// Populate with items
+board.Items.Add(new KanbanBoard.DataStructure.Item(Guid.NewGuid(), toDoPipeline, category1));
+board.Items.Add(new KanbanBoard.DataStructure.Item(Guid.NewGuid(), reviewPipeline, category1));
+board.Items.Add(new KanbanBoard.DataStructure.Item(Guid.NewGuid(), toDoPipeline, null));
+board.Items.Add(new KanbanBoard.DataStructure.Item(Guid.NewGuid(), toDoPipeline, category2));
+board.Items.Add(new KanbanBoard.DataStructure.Item(Guid.NewGuid(), donePipeline, null));
+
+```
+### 3. Visualize network
+Use the referenced kanban board manager to visualize the data.
+
+```C#
+/// <summary>
+/// References the kanban board in the scene.
+/// </summary>
+public KanbanBoard.KanbanBoard Board;
+```
+
+```C#
+// Display board
+Board.Initialize(board);
+```
+
+If you want to group the items by their categories, use the following code instead.
+
+```C#
+// Display board
+Board.Initialize
+(
+    board: board,
+    groupByCategories: true
+);
+```
+
 # Standards
 
 ### General Standards
