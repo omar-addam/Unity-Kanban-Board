@@ -7,9 +7,9 @@ This kanban board provides the following features:
 
 | Setting pipline stages and adding items | Handling empty lists | 
 | :-----: | :-------: |
-| <img src="docs/FeatureBoard.PNG" height="200" /> | <img src="docs/FeatureEmpty.PNG" height="200" /> |
+| <img src="docs/FeatureBoard.PNG" height="250" /> | <img src="docs/FeatureEmpty.PNG" height="250" /> |
 | Scrollable with bigger datasets | Grouping |
-| <img src="docs/FeatureScrollbar.PNG" height="200" /> | <img src="docs/FeatureGroups.PNG" height="200" /> |
+| <img src="docs/FeatureScrollbar.PNG" height="250" /> | <img src="docs/FeatureGroups.PNG" height="250" /> |
 
 # Demo
 
