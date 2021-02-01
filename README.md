@@ -5,7 +5,7 @@ This project provides the implementation of a kanban board for displaying items 
 This kanban board provides the following features:
 
 
-| Setting pipline stages and adding items | Handling empty lists | 
+| Setting pipeline stages and adding items | Handling empty lists | 
 | :-----: | :-------: |
 | <img src="docs/FeatureBoard.PNG" height="250" /> | <img src="docs/FeatureEmpty.PNG" height="250" /> |
 | Scrollable with bigger datasets | Grouping |
